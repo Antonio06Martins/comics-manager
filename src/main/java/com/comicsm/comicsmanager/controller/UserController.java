@@ -33,7 +33,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userSave);
     }
 
-    @ApiOperation(value = "Delete", nickname = "delete")
+    @ApiOperation(value = "Delete", nickname = "deleteUser")
     @DeleteMapping("/{code}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long code) {

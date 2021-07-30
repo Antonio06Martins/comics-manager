@@ -28,8 +28,15 @@ public class ComicsController {
 
     @ApiOperation(value = "Save", nickname = "saveComics")
     @PostMapping
-    public ResponseEntity<Comics> save(@Valid @RequestBody Comics comics) {
-        Comics comicsSave = comicsService.save(comics);
+    public ResponseEntity<Comics> save(@PathVariable Long codeUser, @Valid @RequestBody Comics comics) {
+        Comics comicsSave = comicsService.save(codeUser, comics);
         return ResponseEntity.status(HttpStatus.CREATED).body(comicsSave);
+    }
+
+    @ApiOperation(value = "Delete", nickname = "deleteComics")
+    @DeleteMapping("/{codeComics}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long codeComics) {
+        comicsService.delete(codeComics);
     }
 }

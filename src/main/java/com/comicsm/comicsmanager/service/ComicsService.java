@@ -5,9 +5,11 @@ import com.comicsm.comicsmanager.exception.BusinessRuleException;
 import com.comicsm.comicsmanager.repository.ComicsRepository;
 import com.comicsm.comicsmanager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ComicsService {
@@ -22,10 +24,14 @@ public class ComicsService {
         return comicsRepository.findByUserCode(codeUser);
     }
 
-    public Comics save(Comics comics) {
-        validateComicsUserExists(comics.getUser().getCode());
+    public Comics save(Long codeUser, Comics comics) {
+        validateComicsUserExists(codeUser);
         validateDuplicateComics(comics);
         return comicsRepository.save(comics);
+    }
+
+    public void delete(Long codeComics) {
+        comicsRepository.deleteById(codeComics);
     }
 
     private void validateDuplicateComics(Comics comics) {
