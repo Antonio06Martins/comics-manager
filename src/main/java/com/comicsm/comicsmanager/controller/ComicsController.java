@@ -1,5 +1,6 @@
 package com.comicsm.comicsmanager.controller;
 
+import com.comicsm.comicsmanager.dto.comics.ComicsRequestDTO;
 import com.comicsm.comicsmanager.dto.comics.ComicsResponseDTO;
 import com.comicsm.comicsmanager.entities.Comics;
 import com.comicsm.comicsmanager.service.ComicsService;
@@ -31,9 +32,9 @@ public class ComicsController {
 
     @ApiOperation(value = "Save", nickname = "saveComics")
     @PostMapping
-    public ResponseEntity<Comics> save(@PathVariable Long codeUser, @Valid @RequestBody Comics comics) {
-        Comics comicsSave = comicsService.save(codeUser, comics);
-        return ResponseEntity.status(HttpStatus.CREATED).body(comicsSave);
+    public ResponseEntity<ComicsResponseDTO> save(@PathVariable Long codeUser, @Valid @RequestBody ComicsRequestDTO comicsDto) {
+        Comics comicsSave = comicsService.save(codeUser, comicsDto.convertToEntity(codeUser));
+        return ResponseEntity.status(HttpStatus.CREATED).body(ComicsResponseDTO.convertToComicsDTO(comicsSave));
     }
 
     @ApiOperation(value = "Delete", nickname = "deleteComics")

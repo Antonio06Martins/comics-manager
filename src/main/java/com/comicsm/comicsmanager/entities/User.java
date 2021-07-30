@@ -30,6 +30,11 @@ public class User {
 
     public User() {
     }
+
+    public User(Long code) {
+        this.code = code;
+    }
+
     public User(String name, String email, String cpf, Date birthDate) {
         this.name = name;
         this.email = email;
