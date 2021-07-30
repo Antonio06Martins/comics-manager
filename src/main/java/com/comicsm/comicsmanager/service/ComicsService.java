@@ -1,6 +1,7 @@
 package com.comicsm.comicsmanager.service;
 
 import com.comicsm.comicsmanager.entities.Comics;
+import com.comicsm.comicsmanager.exception.BusinessRuleException;
 import com.comicsm.comicsmanager.repository.ComicsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,9 @@ public class ComicsService {
 
     public List<Comics> listAll(Long codeUser) {
         return comicsRepository.findByUserCode(codeUser);
+    }
+
+    public Comics save(Comics comics) {
+        return comicsRepository.save(comics);
     }
 }

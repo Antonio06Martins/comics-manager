@@ -26,7 +26,7 @@ public class UserController {
         return userService.listAll();
     }
 
-    @ApiOperation(value = "Save", nickname = "save")
+    @ApiOperation(value = "Save", nickname = "saveUser")
     @PostMapping
     public ResponseEntity<User> save(@Valid @RequestBody User user) {
         User userSave = userService.save(user);

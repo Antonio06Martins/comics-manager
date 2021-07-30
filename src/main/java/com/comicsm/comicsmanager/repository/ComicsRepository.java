@@ -8,4 +8,5 @@ import java.util.List;
 public interface ComicsRepository extends JpaRepository<Comics, Long> {
 
     List<Comics> findByUserCode(Long codeUser);
+
 }

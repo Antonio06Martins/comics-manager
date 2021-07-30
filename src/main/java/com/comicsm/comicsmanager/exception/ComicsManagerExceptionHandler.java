@@ -1,5 +1,6 @@
 package com.comicsm.comicsmanager.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,14 @@ public class ComicsManagerExceptionHandler extends ResponseEntityExceptionHandle
     @ExceptionHandler(BusinessRuleException.class)
     public ResponseEntity<Object> handlerBusinessRuleException(BusinessRuleException ex, WebRequest request) {
         String msgUser = ex.getMessage();
+        String msgDeveloper = ex.getMessage();
+        List<Error> erros = Arrays.asList(new Error(msgUser, msgDeveloper));
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handlerDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
+        String msgUser = "Resource Not Found.";
         String msgDeveloper = ex.getMessage();
         List<Error> erros = Arrays.asList(new Error(msgUser, msgDeveloper));
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
