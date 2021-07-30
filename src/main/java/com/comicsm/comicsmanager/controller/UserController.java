@@ -1,5 +1,7 @@
 package com.comicsm.comicsmanager.controller;
 
+import com.comicsm.comicsmanager.dto.user.UserRequestDTO;
+import com.comicsm.comicsmanager.dto.user.UserResponseDTO;
 import com.comicsm.comicsmanager.entities.User;
 import com.comicsm.comicsmanager.service.UserService;
 import io.swagger.annotations.Api;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(tags = "User")
 @RestController
@@ -22,15 +25,17 @@ public class UserController {
 
     @ApiOperation(value = "List All", nickname = "listAll")
     @GetMapping
-    public List<User> listAll() {
-        return userService.listAll();
+    public List<UserResponseDTO> listAll() {
+        return userService.listAll()
+                .stream().map(user -> UserResponseDTO.convertToUserDTO(user))
+                .collect(Collectors.toList());
     }
 
     @ApiOperation(value = "Save", nickname = "saveUser")
     @PostMapping
-    public ResponseEntity<User> save(@Valid @RequestBody User user) {
-        User userSave = userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userSave);
+    public ResponseEntity<UserResponseDTO> save(@Valid @RequestBody UserRequestDTO userDto) {
+        User userSave = userService.save(userDto.convertToEntity());
+        return ResponseEntity.status(HttpStatus.CREATED).body(UserResponseDTO.convertToUserDTO(userSave));
     }
 
     @ApiOperation(value = "Delete", nickname = "deleteUser")

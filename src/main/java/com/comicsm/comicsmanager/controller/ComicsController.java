@@ -1,5 +1,6 @@
 package com.comicsm.comicsmanager.controller;
 
+import com.comicsm.comicsmanager.dto.comics.ComicsResponseDTO;
 import com.comicsm.comicsmanager.entities.Comics;
 import com.comicsm.comicsmanager.service.ComicsService;
 import io.swagger.annotations.Api;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(tags = "Comics")
 @RestController
@@ -22,8 +24,9 @@ public class ComicsController {
 
     @ApiOperation(value = "List All", nickname = "listAll")
     @GetMapping
-    public List<Comics> listAll(@PathVariable Long codeUser) {
-        return comicsService.listAll(codeUser);
+    public List<ComicsResponseDTO> listAll(@PathVariable Long codeUser) {
+        return comicsService.listAll(codeUser).stream().map(comics -> ComicsResponseDTO.convertToComicsDTO(comics))
+                .collect(Collectors.toList());
     }
 
     @ApiOperation(value = "Save", nickname = "saveComics")

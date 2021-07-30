@@ -17,23 +17,25 @@ public class User {
     private Long code;
 
     @Column(name = "name")
-    @NotBlank(message = "Name")
-    @Length(min = 3, max = 50, message = "Name")
     private String name;
 
     @Column(name = "email")
-    @NotBlank(message = "Email")
-    @Length(min = 3, max = 35, message = "Email")
     private String email;
 
     @Column(name = "cpf")
-    @NotBlank(message = "CPF")
-    @Length(min = 3, max = 20, message = "CPF")
     private String cpf;
 
     @Column(name = "birth_date")
-    //@NotBlank(message = "Birth Date")
     private Date birthDate;
+
+    public User() {
+    }
+    public User(String name, String email, String cpf, Date birthDate) {
+        this.name = name;
+        this.email = email;
+        this.cpf = cpf;
+        this.birthDate = birthDate;
+    }
 
     public Long getCode() {
         return code;
