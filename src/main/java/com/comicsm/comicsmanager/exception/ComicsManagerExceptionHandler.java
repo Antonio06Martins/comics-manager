@@ -7,10 +7,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @ControllerAdvice
@@ -25,6 +27,14 @@ public class ComicsManagerExceptionHandler extends ResponseEntityExceptionHandle
         List<Error> errors = generateErrorList(ex.getBindingResult());
 
         return handleExceptionInternal(ex, errors, headers, HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(BusinessRuleException.class)
+    public ResponseEntity<Object> handlerBusinessRuleException(BusinessRuleException ex, WebRequest request) {
+        String msgUser = ex.getMessage();
+        String msgDeveloper = ex.getMessage();
+        List<Error> erros = Arrays.asList(new Error(msgUser, msgDeveloper));
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     private List<Error> generateErrorList(BindingResult bindingResult) {
