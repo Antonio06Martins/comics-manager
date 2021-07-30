@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(tags = "Comics")
@@ -27,7 +28,7 @@ public class ComicsController {
 
     @ApiOperation(value = "Save", nickname = "saveComics")
     @PostMapping
-    public ResponseEntity<Comics> save(@RequestBody Comics comics) {
+    public ResponseEntity<Comics> save(@Valid @RequestBody Comics comics) {
         Comics comicsSave = comicsService.save(comics);
         return ResponseEntity.status(HttpStatus.CREATED).body(comicsSave);
     }

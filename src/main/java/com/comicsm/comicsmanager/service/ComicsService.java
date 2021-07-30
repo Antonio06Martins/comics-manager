@@ -34,7 +34,6 @@ public class ComicsService {
         }
     }
 
-
     private void validateComicsUserExists(Long codeUser) {
         if (codeUser == null) {
             throw new BusinessRuleException("User cannot be null.");

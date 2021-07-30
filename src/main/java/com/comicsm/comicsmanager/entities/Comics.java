@@ -1,6 +1,10 @@
 package com.comicsm.comicsmanager.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -14,31 +18,45 @@ public class Comics {
     private Long codeId;
 
     @Column(name = "comic_id")
+    @NotNull(message = "comic Id")
     private Long comicId;
 
     @Column(name = "title")
+    @NotBlank(message = "Name")
+    @Length(min = 3, max = 50, message = "Name")
     private String title;
 
     @Column(name = "price")
+    @NotNull(message = "Price")
     private BigDecimal price;
 
     @Column(name = "authors")
+    @NotBlank(message = "Authors")
+    @Length(min = 3, max = 50, message = "Authors")
     private String authors;
 
     @Column(name = "isbn")
+    @NotBlank(message = "ISBN")
+    @Length(min = 3, max = 50, message = "ISBN")
     private String isbn;
 
     @Column(name = "description")
+    @NotBlank(message = "Description")
+    @Length(min = 3, max = 100, message = "Description")
     private String description;
 
     @Column(name = "discount_day")
+    @NotBlank(message = "DiscountDay")
+    @Length(min = 3, max = 50, message = "DiscountDay")
     private String discountDay;
 
     @Column(name = "active_discount")
+    @NotNull(message = "Active Discount")
     private Boolean activeDiscount;
 
     @ManyToOne
     @JoinColumn(name = "code_users", referencedColumnName = "code")
+    @NotNull(message = "Code User")
     private User user;
 
     public Long getCodeId() {

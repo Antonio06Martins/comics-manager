@@ -20,6 +20,7 @@ import java.util.List;
 public class ComicsManagerExceptionHandler extends ResponseEntityExceptionHandler {
 
     public static final String CONSTANT_VALIDATION_NOT_BLANK = "NotBlank";
+    public static final String CONSTANT_VALIDATION_NOT_NUll = "NotNull";
     public static final String CONSTANT_VALIDATION_LENGTH = "Length";
 
     @Override
@@ -58,6 +59,9 @@ public class ComicsManagerExceptionHandler extends ResponseEntityExceptionHandle
 
     private String handleErrorMessageForUser(FieldError fieldError) {
         if (fieldError.getCode().equals(CONSTANT_VALIDATION_NOT_BLANK)) {
+            return fieldError.getDefaultMessage().concat(" is required");
+        }
+        if (fieldError.getCode().equals(CONSTANT_VALIDATION_NOT_NUll)) {
             return fieldError.getDefaultMessage().concat(" is required");
         }
         if (fieldError.getCode().equals(CONSTANT_VALIDATION_LENGTH)){
