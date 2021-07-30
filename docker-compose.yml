@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  mysql:
+    image: mysql:8.0.22
+    container_name: mysql_comics
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: comics
+      MYSQL_PASSWORD: comics
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: comics_db
