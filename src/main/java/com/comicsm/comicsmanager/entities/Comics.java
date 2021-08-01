@@ -2,6 +2,7 @@ package com.comicsm.comicsmanager.entities;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 @Entity
@@ -54,6 +55,14 @@ public class Comics {
         this.discountDay = discountDay;
         this.activeDiscount = activeDiscount;
         this.user = user;
+    }
+
+    public Boolean getActiveDiscount() {
+        return activeDiscount;
+    }
+
+    public void setActiveDiscount(Boolean activeDiscount) {
+        this.activeDiscount = activeDiscount;
     }
 
     public Long getCodeId() {
@@ -120,13 +129,6 @@ public class Comics {
         this.discountDay = discountDay;
     }
 
-    public void getActiveDiscount(Boolean activeDiscount) {
-    }
-
-    public void setActiveDiscount(Boolean activeDiscount) {
-        this.activeDiscount = activeDiscount;
-    }
-
     public User getUser() {
         return user;
     }
@@ -148,7 +150,11 @@ public class Comics {
         return Objects.hash(codeId, comicId, title, price, authors, isbn, description, discountDay, activeDiscount, user);
     }
 
-    public boolean getActiveDiscount() {
-        return false;
+    public BigDecimal aplicarValor(BigDecimal price) {
+        if (activeDiscount) {
+            BigDecimal calculoDesconto = price.divide(new BigDecimal(10)).setScale(2, RoundingMode.HALF_EVEN);
+            return price.subtract(calculoDesconto);
+        }
+        return price;
     }
 }

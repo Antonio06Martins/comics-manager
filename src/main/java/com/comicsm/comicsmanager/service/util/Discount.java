@@ -35,9 +35,9 @@ public class Discount {
 
     public static boolean checkActiveDiscount(String discountDay) {
         if (discountDay != null) {
-            LocalDate today = LocalDate.now();
+            LocalDate today = LocalDate.now().plusDays(1);
             DayOfWeek day = today.getDayOfWeek();
-            String dia = day.getDisplayName(TextStyle.FULL, new Locale("pt"));
+            String dia = day.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
 
             if (discountDay.equals(dia)) {
                 return true;

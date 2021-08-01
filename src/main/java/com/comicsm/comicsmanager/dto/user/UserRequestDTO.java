@@ -4,6 +4,7 @@ import com.comicsm.comicsmanager.entities.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class UserRequestDTO {
     @ApiModelProperty(value = "CPF")
     @NotBlank(message = "CPF")
     @Length(min = 3, max = 20, message = "CPF")
+    @CPF
     private String cpf;
 
     @ApiModelProperty(value = "Birth Date")

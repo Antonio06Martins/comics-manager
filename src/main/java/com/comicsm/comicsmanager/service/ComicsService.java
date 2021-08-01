@@ -1,6 +1,7 @@
 package com.comicsm.comicsmanager.service;
 
 import com.comicsm.comicsmanager.entities.Comics;
+import com.comicsm.comicsmanager.entities.User;
 import com.comicsm.comicsmanager.exception.BusinessRuleException;
 import com.comicsm.comicsmanager.repository.ComicsRepository;
 import com.comicsm.comicsmanager.repository.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -66,6 +68,7 @@ public class ComicsService {
             createComic.setComicId(recover.getId());
             createComic.setDescription(recover.getDescription());
             createComic.setIsbn(recover.getIsbn());
+            createComic.setUser(new User(code));
 
             List<Part> authors = recover.getCreators().getItems();
             StringBuilder sb = new StringBuilder();
@@ -78,9 +81,10 @@ public class ComicsService {
             String discountDay = Discount.TheDiscountDay(recover.getIsbn());
             createComic.setDiscountDay(discountDay);
             Boolean activeDiscount = Discount.checkActiveDiscount(discountDay);
-            createComic.getActiveDiscount(activeDiscount);
+            createComic.setActiveDiscount(activeDiscount);
 
-            createComic.setPrice(recover.getPrices().get(0).getPrice());
+            BigDecimal valorComDesconto = createComic.aplicarValor(recover.getPrices().get(0).getPrice());
+            createComic.setPrice(valorComDesconto);
 
             return comicsRepository.save(createComic);
 
