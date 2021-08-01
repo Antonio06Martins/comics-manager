@@ -60,27 +60,27 @@ public class ComicsService {
             Long comicId = comics.getComicId();
             Comics createComic = new Comics();
             FeignComics feignComics = comicsMarvelService.returnComic(comicId, ts, hash, publicKey);
-            Recover resultado = feignComics.getData().getResults().get(0);
+            Recover recover = feignComics.getData().getResults().get(0);
 
-            createComic.setTitle(resultado.getTitle());
-            createComic.setComicId(resultado.getId());
-            createComic.setDescription(resultado.getDescription());
-            createComic.setIsbn(resultado.getIsbn());
+            createComic.setTitle(recover.getTitle());
+            createComic.setComicId(recover.getId());
+            createComic.setDescription(recover.getDescription());
+            createComic.setIsbn(recover.getIsbn());
 
-            List<Part> autores = resultado.getCreators().getItems();
+            List<Part> authors = recover.getCreators().getItems();
             StringBuilder sb = new StringBuilder();
-            autores.forEach(autor -> sb.append(autor.getName()).append(", "));
-            if (!autores.isEmpty()) {
-                String autor = sb.toString();
-                createComic.setAuthors(autor.substring(0, autor.length() - 2));
+            authors.forEach(autor -> sb.append(autor.getName()).append(", "));
+            if (!authors.isEmpty()) {
+                String author = sb.toString();
+                createComic.setAuthors(author.substring(0, author.length() - 2));
             }
 
-            String diaDesconto = Discount.TheDiscountDay(resultado.getIsbn());
-            createComic.setDiscountDay(diaDesconto);
-            Boolean activeDiscount = Discount.checkActiveDiscount(diaDesconto);
+            String discountDay = Discount.TheDiscountDay(recover.getIsbn());
+            createComic.setDiscountDay(discountDay);
+            Boolean activeDiscount = Discount.checkActiveDiscount(discountDay);
             createComic.getActiveDiscount(activeDiscount);
 
-            createComic.setPrice(resultado.getPrices().get(0).getPrice());
+            createComic.setPrice(recover.getPrices().get(0).getPrice());
 
             return comicsRepository.save(createComic);
 
