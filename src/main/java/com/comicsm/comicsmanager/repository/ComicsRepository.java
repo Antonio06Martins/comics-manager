@@ -11,5 +11,4 @@ public interface ComicsRepository extends JpaRepository<Comics, Long> {
     List<Comics> findByUserCode(Long codeUser);
 
     Optional<Comics> findByUserCodeAndTitle(Long codeUser, String title);
-
 }

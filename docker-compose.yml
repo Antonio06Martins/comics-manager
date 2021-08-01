@@ -4,14 +4,14 @@ services:
 
   mysql:
     image: mysql:8.0.22
-    container_name: mysql_comics
+    container_name: mysql_comics_3
     ports:
       - 3306:3306
     environment:
       MYSQL_USER: comics
       MYSQL_PASSWORD: comics
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: comics_db
+      MYSQL_DATABASE: comics_3_db
 
   jaeger:
     image: jaegertracing/all-in-one:1.24

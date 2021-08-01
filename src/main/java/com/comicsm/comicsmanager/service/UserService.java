@@ -4,12 +4,9 @@ import com.comicsm.comicsmanager.entities.User;
 import com.comicsm.comicsmanager.exception.BusinessRuleException;
 import com.comicsm.comicsmanager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 
 @Service
 public class UserService {

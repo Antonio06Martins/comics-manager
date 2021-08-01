@@ -1,10 +1,6 @@
 package com.comicsm.comicsmanager.entities;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -124,8 +120,7 @@ public class Comics {
         this.discountDay = discountDay;
     }
 
-    public Boolean getActiveDiscount() {
-        return activeDiscount;
+    public void getActiveDiscount(Boolean activeDiscount) {
     }
 
     public void setActiveDiscount(Boolean activeDiscount) {
@@ -151,5 +146,9 @@ public class Comics {
     @Override
     public int hashCode() {
         return Objects.hash(codeId, comicId, title, price, authors, isbn, description, discountDay, activeDiscount, user);
+    }
+
+    public boolean getActiveDiscount() {
+        return false;
     }
 }
