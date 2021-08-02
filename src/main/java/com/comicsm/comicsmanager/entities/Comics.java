@@ -151,7 +151,11 @@ public class Comics {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comics comics = (Comics) o;
-        return Objects.equals(codeId, comics.codeId) && Objects.equals(comicId, comics.comicId) && Objects.equals(title, comics.title) && Objects.equals(price, comics.price) && Objects.equals(authors, comics.authors) && Objects.equals(isbn, comics.isbn) && Objects.equals(description, comics.description) && Objects.equals(discountDay, comics.discountDay) && Objects.equals(activeDiscount, comics.activeDiscount) && Objects.equals(user, comics.user);
+        return Objects.equals(codeId, comics.codeId) && Objects.equals(comicId, comics.comicId)
+                && Objects.equals(title, comics.title) && Objects.equals(price, comics.price)
+                && Objects.equals(authors, comics.authors) && Objects.equals(isbn, comics.isbn)
+                && Objects.equals(description, comics.description) && Objects.equals(discountDay, comics.discountDay)
+                && Objects.equals(activeDiscount, comics.activeDiscount) && Objects.equals(user, comics.user);
     }
 
     @Override

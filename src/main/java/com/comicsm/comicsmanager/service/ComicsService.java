@@ -4,7 +4,6 @@ import com.comicsm.comicsmanager.entities.Comics;
 import com.comicsm.comicsmanager.entities.User;
 import com.comicsm.comicsmanager.exception.BusinessRuleException;
 import com.comicsm.comicsmanager.repository.ComicsRepository;
-import com.comicsm.comicsmanager.repository.UserRepository;
 import com.comicsm.comicsmanager.service.util.Discount;
 import com.comicsm.comicsmanager.service.util.GenerateHash;
 import com.comicsm.comicsmanager.service.util.template.FeignComics;
@@ -25,13 +24,7 @@ public class ComicsService {
     private ComicsRepository comicsRepository;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private ComicsMarvelService comicsMarvelService;
-
-    @Autowired
-    private UserService userService;
 
     @Value("${marvel.privateKey}")
     private String privateKey;
