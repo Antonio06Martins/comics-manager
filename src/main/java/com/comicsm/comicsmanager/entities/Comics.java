@@ -45,7 +45,8 @@ public class Comics {
     public Comics() {
     }
 
-    public Comics(Long comicId, String title, BigDecimal price, String authors, String isbn, String description, String discountDay, Boolean activeDiscount, User user) {
+    public Comics(Long comicId, String title, BigDecimal price, String authors, String isbn, String description,
+                  String discountDay, Boolean activeDiscount, User user) {
         this.comicId = comicId;
         this.title = title;
         this.price = price;
@@ -55,6 +56,14 @@ public class Comics {
         this.discountDay = discountDay;
         this.activeDiscount = activeDiscount;
         this.user = user;
+    }
+
+    public BigDecimal applyValue(BigDecimal price) {
+        if (activeDiscount) {
+            BigDecimal discountCalculation = price.divide(new BigDecimal(10)).setScale(2, RoundingMode.HALF_EVEN);
+            return price.subtract(discountCalculation);
+        }
+        return price;
     }
 
     public Boolean getActiveDiscount() {
@@ -148,13 +157,5 @@ public class Comics {
     @Override
     public int hashCode() {
         return Objects.hash(codeId, comicId, title, price, authors, isbn, description, discountDay, activeDiscount, user);
-    }
-
-    public BigDecimal aplicarValor(BigDecimal price) {
-        if (activeDiscount) {
-            BigDecimal calculoDesconto = price.divide(new BigDecimal(10)).setScale(2, RoundingMode.HALF_EVEN);
-            return price.subtract(calculoDesconto);
-        }
-        return price;
     }
 }

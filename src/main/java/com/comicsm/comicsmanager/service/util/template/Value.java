@@ -1,11 +1,19 @@
-package com.comicsm.comicsmanager.service.util.model;
+package com.comicsm.comicsmanager.service.util.template;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Value {
+
     private String type;
     private BigDecimal price;
+
+    public Value() {}
+
+    public Value(String type, BigDecimal price) {
+        this.type = type;
+        this.price = price;
+    }
 
     public String getType() {
         return type;
@@ -17,13 +25,6 @@ public class Value {
         return price;
     }
     public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Value() {}
-
-    public Value(String type, BigDecimal price) {
-        this.type = type;
         this.price = price;
     }
 

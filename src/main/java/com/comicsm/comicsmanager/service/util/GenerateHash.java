@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Hash {
+public class GenerateHash {
 
     public static String createHashMd5(String timestamp, String privateKey, String publicKey) {
         String value = timestamp+privateKey+publicKey;

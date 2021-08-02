@@ -31,14 +31,16 @@ public class UserService {
     private void validateExistingCPF(User user) {
         User userCpf = userRepository.findByCpf(user.getCpf());
         if (userCpf != null && userCpf.getCpf() != user.getCpf()) {
-            throw new BusinessRuleException(String.format("The cpf %s is already registered.", user.getCpf().toUpperCase()));
+            throw new BusinessRuleException(String.format("The cpf %s is already registered.",
+                    user.getCpf().toUpperCase()));
         }
     }
 
     private void validateExistingEmail(User user) {
         User userEmail= userRepository.findByEmail(user.getEmail());
         if (userEmail != null && userEmail.getEmail() != user.getEmail()) {
-            throw new BusinessRuleException(String.format("The Email %s is already registered.", user.getEmail().toUpperCase()));
+            throw new BusinessRuleException(String.format("The Email %s is already registered.",
+                    user.getEmail().toUpperCase()));
         }
     }
 }

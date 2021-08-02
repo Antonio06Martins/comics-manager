@@ -25,7 +25,8 @@ public class ComicsManagerExceptionHandler extends ResponseEntityExceptionHandle
     public static final String CONSTANT_VALIDATION_LENGTH = "Length";
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
         List<Error> errors = generateErrorList(ex.getBindingResult());
 
@@ -41,7 +42,8 @@ public class ComicsManagerExceptionHandler extends ResponseEntityExceptionHandle
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<Object> handlerDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
+    public ResponseEntity<Object> handlerDataIntegrityViolationException(
+            DataIntegrityViolationException ex, WebRequest request) {
         String msgUser = "Resource Not Found.";
         String msgDeveloper = ex.getMessage();
         List<Error> erros = Arrays.asList(new Error(msgUser, msgDeveloper));
@@ -49,7 +51,8 @@ public class ComicsManagerExceptionHandler extends ResponseEntityExceptionHandle
     }
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
-    public ResponseEntity<Object> handlerEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
+    public ResponseEntity<Object> handlerEmptyResultDataAccessException(
+            EmptyResultDataAccessException ex, WebRequest request) {
         String msgUser = "Resource Not Found.";
         String msgDeveloper = ex.toString();
         List<Error> errors = Arrays.asList(new Error(msgUser, msgDeveloper));
@@ -74,7 +77,8 @@ public class ComicsManagerExceptionHandler extends ResponseEntityExceptionHandle
             return fieldError.getDefaultMessage().concat(" is required");
         }
         if (fieldError.getCode().equals(CONSTANT_VALIDATION_LENGTH)){
-            return fieldError.getDefaultMessage().concat(String.format(" must have between %s and %s characters.", fieldError.getArguments()[2], fieldError.getArguments()[1]));
+            return fieldError.getDefaultMessage().concat(String.format(" must have between %s and %s characters.",
+                    fieldError.getArguments()[2], fieldError.getArguments()[1]));
         }
         return fieldError.toString();
     }

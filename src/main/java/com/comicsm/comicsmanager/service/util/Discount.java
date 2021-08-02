@@ -1,6 +1,5 @@
 package com.comicsm.comicsmanager.service.util;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -35,11 +34,9 @@ public class Discount {
 
     public static boolean checkActiveDiscount(String discountDay) {
         if (discountDay != null) {
-            LocalDate today = LocalDate.now().plusDays(1);
-            DayOfWeek day = today.getDayOfWeek();
-            String dia = day.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
-
-            if (discountDay.equals(dia)) {
+            LocalDate today = LocalDate.now().plusDays(3); // adicionando um dia
+            String day = today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+            if (discountDay.equals(day)) {
                 return true;
             }
         }

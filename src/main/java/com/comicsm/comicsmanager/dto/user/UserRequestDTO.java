@@ -29,7 +29,6 @@ public class UserRequestDTO {
     private String cpf;
 
     @ApiModelProperty(value = "Birth Date")
-    //@NotBlank(message = "Birth Date")
     private Date birthDate;
 
     public User convertToEntity() {

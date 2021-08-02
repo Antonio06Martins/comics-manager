@@ -1,4 +1,4 @@
-package com.comicsm.comicsmanager.service.util.model;
+package com.comicsm.comicsmanager.service.util.template;
 
 import java.util.List;
 import java.util.Objects;
@@ -76,12 +76,13 @@ public class Recover {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recover recover = (Recover) o;
-        return Objects.equals(id, recover.id) && Objects.equals(title, recover.title) && Objects.equals(description, recover.description) && Objects.equals(isbn, recover.isbn) && Objects.equals(values, recover.values) && Objects.equals(creators, recover.creators);
+        return Objects.equals(id, recover.id) && Objects.equals(title, recover.title)
+                && Objects.equals(description, recover.description) && Objects.equals(isbn, recover.isbn)
+                && Objects.equals(values, recover.values) && Objects.equals(creators, recover.creators);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, title, description, isbn, values, creators);
     }
-
 }
